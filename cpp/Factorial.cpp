@@ -4,18 +4,19 @@
 using namespace std;
 
 //Declarations
-double Fact(int _n);
-double FactRec(int _n);
+int Fact(int _n);
+int FactRec(int _n);
 void PrintArgError();
 void PrintHelp();
 int main(int argc, char *argv[]){
 
-    if(argc > 1){
+    if(argc < 2){
         PrintArgError();
     }else {
         //GET NUMBER
         char *a = argv[1];
-        int num = atoi(a);
+        int num = atoi(argv[1]);
+        cout << "Computing " << num << " factorial"<<endl ;
 
         //GET FACT METHOD
         bool useRec;
@@ -28,29 +29,29 @@ int main(int argc, char *argv[]){
 
         //CALCULATE FACTORIAL
         if(useRec){
-            cout << FactRec(num);
+            cout << FactRec(num) << endl ;
         }else{
-            cout << Fact(num);
+            cout << Fact(num) << endl;
         }
     }
 
     return 0;
 }
 
-double Fact(int _n){
+int Fact(int _n){
     int _counter;
-    double _return = 1e0;
+    int _return = 1e0;
 
     for (int _counter = 2; _counter <= _n; _counter++)
     {
-        _return += _counter;
+        _return *= _counter;
     }
 
     return _return;
 }
 
-double FactRec(int _n){
-    return ((_n > 1) ? _n * FactRec(_n-1) : 1e0 );
+int FactRec(int _n){
+    return ((_n > 1) ? _n *= FactRec(_n-1) : 1 );
 }
 
 void PrintArgError(){
